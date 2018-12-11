@@ -2,7 +2,6 @@ from transitions.extensions import GraphMachine
 
 from utils import *
 from web_scraper import *
-from natural_language import *
 
 import nltk
 from nltk.tokenize import sent_tokenize
