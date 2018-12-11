@@ -2,8 +2,9 @@ from bottle import route, run, request, abort, static_file
 
 from fsm import TocMachine
 
+PORT = os.environ['PORT']
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 
-VERIFY_TOKEN = "qazwsxedc"
 machine = TocMachine(
     states=[
         'user',
@@ -174,4 +175,4 @@ def show_fsm():
 
 
 if __name__ == "__main__":
-    run(host="0.0.0.0", port=5000, debug=True, reloader=True)
+    run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
