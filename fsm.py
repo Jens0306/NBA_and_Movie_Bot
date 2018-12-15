@@ -288,7 +288,7 @@ class TocMachine(GraphMachine):
                 "payload": "Home"
             },
         ]
-        response = quick_reply_message(sender_id, text, quick_re
+        response = quick_reply_message(sender_id, text, quick_replies)
 
     def on_enter_playerInfo(self, event):
         print("==========================")
