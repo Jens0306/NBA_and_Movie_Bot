@@ -37,7 +37,7 @@ class TocMachine(GraphMachine):
         return False
 
     # input s to start
-    def is_going_to_state1(self, event):
+    def is_going_to_start(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 's'
@@ -47,7 +47,7 @@ class TocMachine(GraphMachine):
         return False
 
     # NBA today
-    def is_going_to_state2(self, event):
+    def is_going_to_nbaToday(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'nba today'
@@ -58,7 +58,7 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
-    def is_going_to_state3(self, event):
+    def is_going_to_nbaStatus(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'nba stats'
@@ -68,8 +68,19 @@ class TocMachine(GraphMachine):
             if ("stats" in text or "status" in text):
                 return True
         return False
+    
+    def is_going_to_playerInfo(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'players info'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if ("players" in text or "player" in text):
+                return True
+        return False
 
-    def is_going_to_state4(self, event):
+    def is_going_to_pickDivision(self, event):
         if event.get("postback"):
             text = event['postback']['title']            
             return (text.lower() == 'east' or text.lower() == 'west')
@@ -81,7 +92,7 @@ class TocMachine(GraphMachine):
         return False
 
 
-    def is_going_to_state5(self, event):
+    def is_going_to_teams(self, event):
         if event.get("postback"):
             text = event['postback']['title']            
             return (text.lower() == 'atlantic' or text.lower() == 'central' or text.lower() == 'southeast' or text.lower() == 'southwest' or text.lower() == 'northwest' or text.lower() == 'pacific')
@@ -93,7 +104,7 @@ class TocMachine(GraphMachine):
         return False
 
 
-    def is_going_to_state6(self, event):
+    def is_going_to_playerPpg(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             text = text.lower()
@@ -108,7 +119,7 @@ class TocMachine(GraphMachine):
         return False
 
 
-    def is_going_to_state7(self, event):
+    def is_going_to_nbaGames(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'nba games'
@@ -119,7 +130,7 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
-    def is_going_to_state8(self, event):
+    def is_going_to_boxScore(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'box score'
@@ -130,7 +141,7 @@ class TocMachine(GraphMachine):
                 return True
         return False
     
-    def is_going_to_state9(self, event):
+    def is_going_to_nbaNews(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'nba news'
@@ -142,7 +153,7 @@ class TocMachine(GraphMachine):
         return False
 
 
-    def go_back_to_state1(self, event):
+    def go_back_to_start(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'home'
@@ -154,7 +165,7 @@ class TocMachine(GraphMachine):
         return False
 
 
-    def go_back_to_state2(self, event):
+    def go_back_to_nbaToday(self, event):
         if event.get("postback"):
             text = event['postback']['title']
             return text.lower() == 'more nba'
@@ -174,7 +185,7 @@ class TocMachine(GraphMachine):
         data = "Enter the word."
         response = send_text_message(sender_id, data)
 
-    def on_enter_state1(self, event):
+    def on_enter_start(self, event):
         print("==========================")
         print("Start Playing")
         print("==========================")
@@ -195,7 +206,7 @@ class TocMachine(GraphMachine):
         response = quick_reply_message(sender_id, text, quick_replies)
         # self.go_back()
 
-    def on_enter_state2(self, event):
+    def on_enter_nbaToday(self, event):
         print("==========================")
         print("More NBA Options")
         print("==========================")
@@ -222,8 +233,31 @@ class TocMachine(GraphMachine):
         ]
         response = template_message(sender_id, title, image_url, subtitle, data)
 
-    def on_enter_state3(self, event):
+    def on_enter_nbaStatus(self, event):
         print("==========================")
+        print("NBA Status")
+        print("==========================")
+        sender_id = event['sender']['id']
+        title="NBA Status"
+        image_url="https://i.imgur.com/nWs2EuN.jpg"
+        subtitle="Standings / Players"
+        data = [
+            {
+                "type": "postback",
+                "title": "Standings",
+                "payload": "Standings"
+            },
+            {
+                "type": "postback",
+                "title": "Players Info",
+                "payload": "Players Info"
+            }
+        ]
+        response = template_message(sender_id, title, image_url, subtitle, data)
+
+    def on_enter_playerInfo(self, event):
+        print("==========================")
+        print("Player Info")
         print("Choose conference")
         print("==========================")
         sender_id = event['sender']['id']
@@ -244,7 +278,8 @@ class TocMachine(GraphMachine):
         ]
         response = template_message(sender_id, title, image_url, subtitle, data)
 
-    def on_enter_state4(self, event):
+
+    def on_enter_pickDivision(self, event):
         print("==========================")
         print("Pick division")
         print("==========================")
@@ -273,7 +308,7 @@ class TocMachine(GraphMachine):
                 )
         response = quick_reply_message(sender_id, text, quick_replies)
 
-    def on_enter_state5(self, event):
+    def on_enter_teams(self, event):
         sender_id = event['sender']['id']
         text = "Pick a team"
         quick_replies = []
@@ -291,7 +326,7 @@ class TocMachine(GraphMachine):
             )
         response = quick_reply_message(sender_id, text, quick_replies)
 
-    def on_enter_state6(self, event):
+    def on_enter_playerPpg(self, event):
         print("team info:")
         sender_id = event['sender']['id']
         text = word_tokenize(event['message']['text'].lower())
@@ -321,7 +356,7 @@ class TocMachine(GraphMachine):
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
 
-    def on_enter_state7(self, event):
+    def on_enter_nbaGames(self, event):
         print("======================")
         print("Games Today")
         print("======================")
@@ -347,9 +382,8 @@ class TocMachine(GraphMachine):
             }
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
-        # self.go_back_to_state2()
         
-    def on_enter_state8(self, event):
+    def on_enter_boxScore(self, event):
         print("======================")
         print("Box Score")
         print("======================")
@@ -371,7 +405,7 @@ class TocMachine(GraphMachine):
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
 
-    def on_enter_state9(self, event):
+    def on_enter_nbaNews(self, event):
         print("======================")
         print("News")
         print("======================")

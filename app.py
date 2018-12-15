@@ -8,16 +8,19 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 machine = TocMachine(
     states=[
         'user',
-        'state1',
-        'state2',
-        'state3',
-        'state4',
-        'state5',
-        'state6',
-        'state7',
-        'state8',
-        'state9',
+        'start',
+        'nbaToday',
+        'nbaStatus',
+        'playerInfo',
+        'pickDivision',
+        'teams',
+        'playerPpg',
+        'nbaGames',
+        'boxScore',
+        'nbaNews',
         'state10',
+        'standing',
+        'players_info',
         'translate',
         'trans_result'
     ],
@@ -25,103 +28,109 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': 'user',
-            'dest': 'state1',
-            'conditions': 'is_going_to_state1'
+            'dest': 'start',
+            'conditions': 'is_going_to_start'
         },
         {
             'trigger': 'advance',
-            'source': 'state1',
-            'dest': 'state2',
-            'conditions': 'is_going_to_state2'
+            'source': 'start',
+            'dest': 'nbaToday',
+            'conditions': 'is_going_to_nbaToday'
         },
         {
             'trigger': 'advance',
-            'source': 'state2',
-            'dest': 'state3',
-            'conditions': 'is_going_to_state3'
+            'source': 'nbaToday',
+            'dest': 'nbaStatus',
+            'conditions': 'is_going_to_nbaStatus'
         },
         {
             'trigger': 'advance',
-            'source': 'state3',
-            'dest': 'state4',
-            'conditions': 'is_going_to_state4'
+            'source': 'nbaStatus',
+            'dest': 'playerInfo',
+            'conditions': 'is_going_to_playerInfo'
         },
         {
             'trigger': 'advance',
-            'source': 'state4',
-            'dest': 'state5',
-            'conditions': 'is_going_to_state5'
+            'source': 'playerInfo',
+            'dest': 'pickDivision',
+            'conditions': 'is_going_to_pickDivision'
         },
         {
             'trigger': 'advance',
-            'source': 'state5',
-            'dest': 'state6',
-            'conditions': 'is_going_to_state6'
+            'source': 'pickDivision',
+            'dest': 'teams',
+            'conditions': 'is_going_to_teams'
         },
         {
             'trigger': 'advance',
-            'source': 'state2',
-            'dest': 'state7',
-            'conditions': 'is_going_to_state7'
+            'source': 'teams',
+            'dest': 'playerPpg',
+            'conditions': 'is_going_to_playerPpg'
         },
         {
             'trigger': 'advance',
-            'source': 'state7',
-            'dest': 'state8',
-            'conditions': 'is_going_to_state8'
+            'source': 'nbaToday',
+            'dest': 'nbaGames',
+            'conditions': 'is_going_to_nbaGames'
         },
         {
             'trigger': 'advance',
-            'source': 'state2',
-            'dest': 'state9',
-            'conditions': 'is_going_to_state9'
+            'source': 'nbaGames',
+            'dest': 'boxScore',
+            'conditions': 'is_going_to_boxScore'
         },
         {
             'trigger': 'advance',
-            'source': 'state1',
+            'source': 'nbaToday',
+            'dest': 'nbaNews',
+            'conditions': 'is_going_to_nbaNews'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'start',
             'dest': 'translate',
             'conditions': 'search_word'
         },
         {
             'trigger': 'advance',
-            'source': 'state1',
+            'source': 'start',
             'dest': 'translate',
             'conditions': 'search_word'
         },
         {
             'trigger': 'advance',
             'source': [
-                'state2',
-                'state3',
-                'state4',
-                'state5',
-                'state6',
-                'state7',
-                'state8',
-                'state9'
+                'nbaToday',
+                'nbaStatus',
+                'pickDivision',
+                'teams',
+                'playerPpg',
+                'nbaGames',
+                'boxScore',
+                'nbaNews'
             ],
-            'dest': 'state1',
-            'conditions': 'go_back_to_state1'
+            'dest': 'start',
+            'conditions': 'go_back_to_start'
         },
         {
             'trigger': 'advance',
             'source': [
-                'state4',
-                'state5',
-                'state6',
-                'state7',
-                'state8',
-                'state9'
+                'pickDivision',
+                'teams',
+                'playerPpg',
+                'nbaGames',
+                'boxScore',
+                'nbaNews'
             ],
-            'dest': 'state2',
-            'conditions': 'go_back_to_state2'
+            'dest': 'nbaToday',
+            'conditions': 'go_back_to_nbaToday'
         },
         {
             'trigger': 'go_back',
             'source': [
-                'state1',
-                'state2',
-                'state3'
+                'start',
+                'nbaToday',
+                'nbaStatus'
             ],
             'dest': 'user'
         }
