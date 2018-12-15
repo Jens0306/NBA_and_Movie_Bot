@@ -20,6 +20,8 @@ all_teams = []
 all_teams = list(NBA_team(currentYear))
 # print(all_teams)
 
+show_fsm()
+
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(
@@ -240,7 +242,7 @@ class TocMachine(GraphMachine):
         sender_id = event['sender']['id']
         title="NBA Status"
         image_url="https://i.imgur.com/nWs2EuN.jpg"
-        subtitle="Standings / Players"
+        subtitle="Standings/Players"
         data = [
             {
                 "type": "postback",
