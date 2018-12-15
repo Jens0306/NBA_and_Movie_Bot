@@ -188,14 +188,14 @@ def nbaStandings():
         dictEast[team['profile']['name']] = team['standings']['confRank']
     listEast = sorted(dictEast, key=dictEast.__getitem__)
     text1 = ""
-    for team in listEast:
+    for idx, team in enumerate(listEast):
         text1 += str(idx+1) + ". " + team + "\n"
 
     for team in teamWest:
         dictWest[team['profile']['name']] = team['standings']['confRank']
     listWest = sorted(dictWest, key=dictWest.__getitem__)
     text2 = ""
-    for team in listWest:
+    for idx, team in enumerate(listWest):
         text2 += str(idx+1) + ". " + team + "\n"
 
     return [text1, text2]
