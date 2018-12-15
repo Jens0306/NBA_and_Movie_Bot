@@ -70,6 +70,17 @@ class TocMachine(GraphMachine):
                 return True
         return False
     
+    def is_going_to_nbaStandings(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'standings'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if ("standings" in text or "standing" in text):
+                return True
+        return False
+
     def is_going_to_playerInfo(self, event):
         if event.get("postback"):
             text = event['postback']['title']
@@ -255,6 +266,29 @@ class TocMachine(GraphMachine):
             }
         ]
         response = template_message(sender_id, title, image_url, subtitle, data)
+
+    def on_enter_nbaStandings(self, event):
+        print("==========================")
+        print("Standings")
+        print("==========================")
+        sender_id = event['sender']['id']
+        [eastStands, westStands] = nbaStandings()
+        response = send_text_message(sender_id, eastStands)
+        response = send_text_message(sender_id, westStands)
+        text = "What's next?"
+        quick_replies = [
+            {
+                "content_type": "text",
+                "title": "More NBA",
+                "payload": "More NBA"
+            },
+            {
+                "content_type": "text",
+                "title": "Home",
+                "payload": "Home"
+            },
+        ]
+        response = quick_reply_message(sender_id, text, quick_re
 
     def on_enter_playerInfo(self, event):
         print("==========================")

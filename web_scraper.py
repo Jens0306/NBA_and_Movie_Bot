@@ -172,6 +172,35 @@ def NBA_teamStats(team):
     return player_status
     # return(df)
 
+def nbaStandings():
+    url = 'http://global.nba.com/statsm2/season/conferencestanding.json'
+    rs = requests.session()
+    res = rs.get(url, verify=True)
+    reqsjson = json.loads(res.text)
+    teamEast = reqsjson['payload']['standingGroups'][0]['teams']
+    teamWest = reqsjson['payload']['standingGroups'][1]['teams']
+
+    dictEast = {}
+    dictWest = {}
+    # listEast = []
+    # listWest = []
+    for team in teamEast:
+        dictEast[team['profile']['name']] = team['standings']['confRank']
+    listEast = sorted(dictEast, key=dictEast.__getitem__)
+    text1 = ""
+    for team in listEast:
+        text1 += str(idx+1) + ". " + team + "\n"
+
+    for team in teamWest:
+        dictWest[team['profile']['name']] = team['standings']['confRank']
+    listWest = sorted(dictWest, key=dictWest.__getitem__)
+    text2 = ""
+    for team in listWest:
+        text2 += str(idx+1) + ". " + team + "\n"
+
+    return [text1, text2]
+
+
 def NBA_news():
     url = 'http://www.espn.com/nba/world-of-woj/'
     head = 'http://www.espn.com'

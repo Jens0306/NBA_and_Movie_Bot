@@ -11,6 +11,7 @@ machine = TocMachine(
         'start',
         'nbaToday',
         'nbaStatus',
+        'nbaStandings',
         'playerInfo',
         'pickDivision',
         'teams',
@@ -42,6 +43,12 @@ machine = TocMachine(
             'source': 'nbaToday',
             'dest': 'nbaStatus',
             'conditions': 'is_going_to_nbaStatus'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'nbaStatus',
+            'dest': 'nbaStandings',
+            'conditions': 'is_going_to_nbaStandings'
         },
         {
             'trigger': 'advance',
@@ -102,6 +109,7 @@ machine = TocMachine(
             'source': [
                 'nbaToday',
                 'nbaStatus',
+                'nbaStandings',
                 'pickDivision',
                 'teams',
                 'playerPpg',
@@ -115,6 +123,7 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': [
+                'nbaStandings'
                 'pickDivision',
                 'teams',
                 'playerPpg',
@@ -184,5 +193,6 @@ def show_fsm():
 
 
 if __name__ == "__main__":
-    show_fsm()
+    # show_fsm()
     run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
+    # run(host="127.0.0.1", port="localhost", debug=True, reloader=True)
