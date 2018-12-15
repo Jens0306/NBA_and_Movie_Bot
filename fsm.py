@@ -275,6 +275,7 @@ class TocMachine(GraphMachine):
         standsList = nbaStandings()
         eastStands = standsList[0]
         westStands = standsList[1]
+        print(eastStands)
         response = send_text_message(sender_id, eastStands)
         response = send_text_message(sender_id, westStands)
         text = "What's next?"
