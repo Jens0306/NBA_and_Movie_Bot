@@ -20,7 +20,6 @@ all_teams = []
 all_teams = list(NBA_team(currentYear))
 # print(all_teams)
 
-show_fsm()
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
