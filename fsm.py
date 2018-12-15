@@ -272,7 +272,9 @@ class TocMachine(GraphMachine):
         print("Standings")
         print("==========================")
         sender_id = event['sender']['id']
-        [eastStands, westStands] = nbaStandings()
+        standsList = nbaStandings()
+        eastStands = standsList[0]
+        westStands = standsList[1]
         response = send_text_message(sender_id, eastStands)
         response = send_text_message(sender_id, westStands)
         text = "What's next?"
