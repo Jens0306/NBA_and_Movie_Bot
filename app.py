@@ -123,7 +123,7 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': [
-                'nbaStandings'
+                'nbaStandings',
                 'pickDivision',
                 'teams',
                 'playerPpg',
