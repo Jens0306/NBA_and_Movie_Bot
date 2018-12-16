@@ -254,23 +254,17 @@ def NBA_news():
     # print(content)
     return content
 
-def appleNews():
-    targetURL = 'http://www.appledaily.com.tw/realtimenews/section/new/'
-    head = 'http://www.appledaily.com.tw'
-    print('Start parsing appleNews....')
+def moviePoster(page):
+    targetURL = 'http://www.imdb.cn/imdb250/' + str(page)
+    head = ''
     rs = requests.session()
     res = rs.get(targetURL, verify=False)
     soup = BeautifulSoup(res.text, 'html.parser')
-    content = ""
-    for index, data in enumerate(soup.select('.rtddt a'), 0):
-        if index == 6:
-            return content
-        if head in data['href']:
-            link = data['href']
-        else:
-            link = head + data['href']
-        content += link + '\n----------------------------------\n'
-    print(content)
-    return content
+    imgUrls = []
+    for index, data in enumerate(soup.select('.ss-3 .hong img'), 0):
+        if index == 5:
+            return imgUrls
+        imgUrls.append(data['src'])
 
+    return imgUrls
 

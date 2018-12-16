@@ -53,11 +53,11 @@ class TocMachine(GraphMachine):
     def is_going_to_moviePics(self, event):
         if event.get("postback"):
             text = event['postback']['title']
-            return text.lower() == 'movie pictures'
+            return text.lower() == 'movie poster'
         elif event.get("message"):
             text = event['message']['text']
             text = word_tokenize(text.lower())
-            if "movie" in text or "picture" in text:
+            if "movie" in text or "poster" in text:
                 return True
         return False
 
@@ -255,7 +255,7 @@ class TocMachine(GraphMachine):
         print("Start Playing")
         print("==========================")
         sender_id = event['sender']['id']
-        text = "Enter 'S' to start playing.\nEnter 'Help' to see the usage.\n"
+        text = "Enter 'S' to start playing.\nEnter 'Help' to see the usage.\nEnter 'Movie Poster' to see top5 movies' poster"
         quick_replies = [
             {
                 "content_type": "text",
@@ -266,6 +266,11 @@ class TocMachine(GraphMachine):
                 "content_type": "text",
                 "title": "Help",
                 "payload": "Help"
+            },
+            {
+                "content_type": "text",
+                "title": "Movie Poster",
+                "payload": "Movie Poster"
             }
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
@@ -276,8 +281,9 @@ class TocMachine(GraphMachine):
         print("Movie Pictures")
         print("==========================")
         sender_id = event['sender']['id']
-        url = "https://m.media-amazon.com/images/M/MV5BMTQ4MTA0NjEzMF5BMl5BanBnXkFtZTgwMDg4NDYxMzE@._V1_UY67_CR1,0,45,67_AL_.jpg"
-        responese = send_image_message(sender_id, url)
+        imgUrls = moviePoster()
+        for url in imgUrls:
+            responese = send_image_message(sender_id, url)
         self.go_back()
 
     def on_enter_nbaToday(self, event):
