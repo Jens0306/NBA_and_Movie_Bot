@@ -347,6 +347,7 @@ class TocMachine(GraphMachine):
         response = send_text_message(sender_id, standsList[2])
         response = send_text_message(sender_id, standsList[3])
         response = send_text_message(sender_id, standsList[4])
+        response = send_text_message(sender_id, standsList[5])
         text = "What's next?"
         quick_replies = [
             {

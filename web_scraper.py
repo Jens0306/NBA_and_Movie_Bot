@@ -209,7 +209,10 @@ def NBA_standings(query):
         return [text1, text2]
 
     # ============ sort in divisions ================
-    else:
+    elif query == "division":
+        print("==========================")
+        print("TEST")
+        print("==========================")
         for team in teamEast:
             allTeam.append(team)
         for team in teamWest:
