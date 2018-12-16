@@ -268,3 +268,13 @@ def moviePoster(page):
 
     # return imgUrls
 
+def latestPoster():
+    targetURL = 'https://www.imdb.com/gallery/rg1624939264?ref_=nv_ph_lp'
+    rs = requests.session()
+    res = rs.get(targetURL, verify=True)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    imgUrls = []
+    for idx, data in enumerate(soup.select('.media_index_thumb_list a img'), 0):
+        if idx == 15:
+            return imgUrls
+        imgUrls.append(data['src'])

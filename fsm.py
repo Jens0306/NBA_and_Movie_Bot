@@ -7,6 +7,8 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
+ import random
+
 mytext = "Oh yeah lakers!"
 print("================================")
 # print(word_tokenize(mytext))
@@ -18,7 +20,8 @@ currentDate = str(dataInfo[1])
 # currentDate = "20181207"
 all_teams = []
 all_teams = list(NBA_team(currentYear))
-imgUrls = moviePoster(1)
+# imgUrls = moviePoster(1)
+imgUrls = latestPoster
 print(imgUrls)
 
 
@@ -282,8 +285,10 @@ class TocMachine(GraphMachine):
         print("Movie Pictures")
         print("==========================")
         sender_id = event['sender']['id']
-        for img in imgUrls:
-            responese = send_image_message(sender_id, img)
+        index = random.randint(0, 15)
+        responese = send_image_message(sender_id, imgUrls[index])
+        # for img in imgUrls:
+        #     responese = send_image_message(sender_id, img)
         self.go_back()
 
     def on_enter_nbaToday(self, event):
