@@ -124,6 +124,8 @@ machine = TocMachine(
                 'nbaToday',
                 'nbaStatus',
                 'nbaStandings',
+                'confStandings',
+                'divStandings',
                 'pickDivision',
                 'teams',
                 'playerPpg',
@@ -138,6 +140,8 @@ machine = TocMachine(
             'trigger': 'advance',
             'source': [
                 'nbaStandings',
+                'confStandings',
+                'divStandings',
                 'pickDivision',
                 'teams',
                 'playerPpg',
