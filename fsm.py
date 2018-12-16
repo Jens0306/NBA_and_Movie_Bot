@@ -50,6 +50,17 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
+    def is_going_to_moviePics(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'movie pictures'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if "movie" in text or "picture" in text:
+                return True
+        return False
+
     # # input s to start (NBA today)
     def is_going_to_nbaToday(self, event):
         if event.get("postback"):
@@ -258,6 +269,15 @@ class TocMachine(GraphMachine):
             }
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
+        self.go_back()
+
+    def on_enter_moviePics(self, event):
+        print("==========================")
+        print("Movie Pictures")
+        print("==========================")
+        sender_id = event['sender']['id']
+        url = "http://posters.imdb.cn/upload/2016/08/22/vNgaX4hhj_1471854359.jpg"
+        responese = send_image_message(sender_id, url)
         self.go_back()
 
     def on_enter_nbaToday(self, event):
