@@ -20,9 +20,7 @@ machine = TocMachine(
         'playerPpg',
         'nbaGames',
         'boxScore',
-        'nbaNews',
-        'translate',
-        'trans_result'
+        'nbaNews'
     ],
     transitions=[
         {

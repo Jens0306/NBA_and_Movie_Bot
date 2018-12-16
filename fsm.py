@@ -28,15 +28,6 @@ class TocMachine(GraphMachine):
             **machine_configs
         )
 #====================================== Conditions ======================================
-    def search_word(self, event):
-        if event.get("postback"):
-            text = event['postback']['title']
-            return text.lower() == 'search words'
-        elif event.get("message"):
-            text = event['message']['text']
-            return text.lower() == 'search words'
-        return False
-
     # # input s to start
     # def is_going_to_start(self, event):
     #     if event.get("postback"):
@@ -201,13 +192,17 @@ class TocMachine(GraphMachine):
 
 
     def go_back_to_start(self, event):
+        sender_id = event['sender']['id']
+        data = "Welcome home."
         if event.get("postback"):
-            text = event['postback']['title']
+            text = event['postback']['title']    
+            response = send_text_message(sender_id, data)
             return text.lower() == 'home'
         elif event.get("message"):
             text = event['message']['text']
             text = word_tokenize(text.lower())
             if "home" in text:
+                response = send_text_message(sender_id, data)
                 return True
         return False
 
@@ -224,14 +219,6 @@ class TocMachine(GraphMachine):
         return False
 
 #===================================== actions =======================================
-    def on_enter_translate(self, event):
-        print("==========================")
-        print("want translate")
-        print("==========================")
-        sender_id = event['sender']['id']
-        data = "Enter the word."
-        response = send_text_message(sender_id, data)
-
     # def on_enter_start(self, event):
     #     print("==========================")
     #     print("Start Playing")
