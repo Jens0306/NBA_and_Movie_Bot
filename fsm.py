@@ -7,7 +7,7 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
- import random
+import random
 
 mytext = "Oh yeah lakers!"
 print("================================")
