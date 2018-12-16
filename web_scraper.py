@@ -210,6 +210,10 @@ def NBA_standings(query):
 
     # ============ sort in divisions ================
     else:
+        for team in teamEast:
+            allTeam.append(team)
+        for team in teamWest:
+            allTeam.append(team)
         allTeam.sort(key=lambda div: div['profile']['division'])
         groups = groupby(allTeam, lambda div: div['profile']['division'])
         divs = []
