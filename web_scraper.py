@@ -227,7 +227,7 @@ def NBA_standings(query):
             for idx, name in enumerate(listAll):
                 text += str(idx+1) + "." + name + "\n"
             divs.append(text)
-
+        print(divs)
         return divs
 
 
