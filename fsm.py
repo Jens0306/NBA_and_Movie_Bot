@@ -21,7 +21,7 @@ currentDate = str(dataInfo[1])
 all_teams = []
 all_teams = list(NBA_team(currentYear))
 # imgUrls = moviePoster(1)
-imgUrls = latestPoster
+imgUrls = latestPoster()
 print(imgUrls)
 
 
