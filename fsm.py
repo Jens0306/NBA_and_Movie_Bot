@@ -278,7 +278,7 @@ class TocMachine(GraphMachine):
         response = quick_reply_message(sender_id, text, quick_replies)
         self.go_back()
 
-    def on_enter_moviePics(self, event):
+    async def on_enter_moviePics(self, event):
         print("==========================")
         print("Movie Pictures")
         print("==========================")
