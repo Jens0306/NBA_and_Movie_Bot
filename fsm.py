@@ -285,7 +285,7 @@ class TocMachine(GraphMachine):
         print("Movie Pictures")
         print("==========================")
         sender_id = event['sender']['id']
-        index = random.randint(0, 15)
+        index = random.randint(0, 14)
         responese = send_image_message(sender_id, imgUrls[index])
         # for img in imgUrls:
         #     responese = send_image_message(sender_id, img)
