@@ -261,10 +261,10 @@ def moviePoster(page):
     res = rs.get(targetURL, verify=False)
     soup = BeautifulSoup(res.text, 'html.parser')
     imgUrls = []
-    for index, data in enumerate(soup.select('.ss-3 .hong img'), 0):
-        if index == 5:
+    for idx, data in enumerate(soup.select('.ss-3 .hong img'), 0):
+        if idx == 5:
             return imgUrls
         imgUrls.append(data['src'])
 
-    return imgUrls
+    # return imgUrls
 
