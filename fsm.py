@@ -50,16 +50,16 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
-    def is_going_to_moviePics(self, event):
-        if event.get("postback"):
-            text = event['postback']['title']
-            return text.lower() == 'movie poster'
-        elif event.get("message"):
-            text = event['message']['text']
-            text = word_tokenize(text.lower())
-            if "movie" in text or "poster" in text:
-                return True
-        return False
+    # def is_going_to_moviePics(self, event):
+    #     if event.get("postback"):
+    #         text = event['postback']['title']
+    #         return text.lower() == 'movie poster'
+    #     elif event.get("message"):
+    #         text = event['message']['text']
+    #         text = word_tokenize(text.lower())
+    #         if "movie poster" in text:
+    #             return True
+    #     return False
 
     # # input s to start (NBA today)
     def is_going_to_nbaToday(self, event):
