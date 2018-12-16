@@ -282,8 +282,8 @@ class TocMachine(GraphMachine):
         print("==========================")
         sender_id = event['sender']['id']
         imgUrls = moviePoster(1)
-        # for url in imgUrls:
-        responese = send_image_message(sender_id, imgUrls[0])
+        for img in imgUrls:
+            responese = send_image_message(sender_id, img)
         self.go_back()
 
     def on_enter_nbaToday(self, event):
