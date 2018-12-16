@@ -24,7 +24,7 @@ def NBA_team(year):
     for team in teams:
         if (team['isNBAFranchise']):
             if (team['nickname'].lower() == "76ers"):
-                list.append(team['urlName'])
+                list.append(team['urlName'].lower())
             else:
                 list.append(team['nickname'].lower())
     # print(list)
@@ -66,7 +66,7 @@ def NBA_division_team(division, year):
     for team in teams:
         if (team['isNBAFranchise']):
             if (team['nickname'] == "76ers"):
-                data[team['divName']].append(team['urlName'])
+                data[team['divName']].append(team['urlName'].title())
             else:
                 data[team['divName']].append(team['nickname'])
     print(data)
@@ -178,7 +178,7 @@ def NBA_teamStats(team):
     return player_status
     # return(df)
 
-def NBA_standings():
+def NBA_standings(query):
     url = 'http://global.nba.com/statsm2/season/conferencestanding.json'
     rs = requests.session()
     res = rs.get(url, verify=True)
@@ -188,23 +188,43 @@ def NBA_standings():
 
     dictEast = {}
     dictWest = {}
-    # listEast = []
-    # listWest = []
-    for team in teamEast:
-        dictEast[team['profile']['name']] = team['standings']['confRank']
-    listEast = sorted(dictEast, key=dictEast.__getitem__)
-    text1 = "East\n----------------\n"
-    for idx, team in enumerate(listEast):
-        text1 += str(idx+1) + ". " + team + "\n"
+    allTeam = []
+    dictAll = {}
+    # ============ sort in conference ==============
+    if query == "conference":
+        for team in teamEast:
+            dictEast[team['profile']['name']] = team['standings']['confRank']
+        listEast = sorted(dictEast, key=dictEast.__getitem__)
+        text1 = "East\n----------------\n"
+        for idx, team in enumerate(listEast):
+            text1 += str(idx+1) + ". " + team + "\n"
 
-    for team in teamWest:
-        dictWest[team['profile']['name']] = team['standings']['confRank']
-    listWest = sorted(dictWest, key=dictWest.__getitem__)
-    text2 = "West\n----------------\n"
-    for idx, team in enumerate(listWest):
-        text2 += str(idx+1) + ". " + team + "\n"
+        for team in teamWest:
+            dictWest[team['profile']['name']] = team['standings']['confRank']
+        listWest = sorted(dictWest, key=dictWest.__getitem__)
+        text2 = "West\n----------------\n"
+        for idx, team in enumerate(listWest):
+            text2 += str(idx+1) + ". " + team + "\n"
 
-    return [text1, text2]
+        return [text1, text2]
+
+    # ============ sort in divisions ================
+    else:
+        allTeam.sort(key=lambda div: div['profile']['division'])
+        groups = groupby(allTeam, lambda div: div['profile']['division'])
+        divs = []
+        for div, group in groups:
+            text = ""
+            text += div+":\n-----------------\n"
+            dictAll = {}
+            for team in group:
+                dictAll[team['profile']['name']] = team['standings']['divRank']
+            listAll = sorted(dictAll, key=dictAll.__getitem__)
+            for idx, name in enumerate(listAll):
+                text += str(idx+1) + "." + name + "\n"
+            divs.append(text)
+
+        return divs
 
 
 def NBA_news():

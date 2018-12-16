@@ -80,6 +80,28 @@ class TocMachine(GraphMachine):
             if ("standings" in text or "standing" in text):
                 return True
         return False
+    
+    def is_going_to_confStandings(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'conference'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if ("conference" in text):
+                return True
+        return False
+
+    def is_going_to_divStandings(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'division'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if ("division" in text):
+                return True
+        return False
 
     def is_going_to_playerInfo(self, event):
         if event.get("postback"):
@@ -272,11 +294,59 @@ class TocMachine(GraphMachine):
         print("Standings")
         print("==========================")
         sender_id = event['sender']['id']
-        standsList = NBA_standings()
+        title="Standings" 
+        image_url="https://i.imgur.com/nWs2EuN.jpg"
+        subtitle="more options"
+        data = [
+            {
+                "type": "postback",
+                "title": "Conference",
+                "payload": "Conference"
+            },
+            {
+                "type": "postback",
+                "title": "Division",
+                "payload": "Division"
+            }
+        ]
+        response = template_message(sender_id, title, image_url, subtitle, data)
+
+    def on_enter_confStandings(self, event):
+        print("==========================")
+        print("Sort By Conference")
+        print("==========================")
+        sender_id = event['sender']['id']
+        standsList = NBA_standings("conference")
         eastStands = standsList[0]
         westStands = standsList[1]
         response = send_text_message(sender_id, eastStands)
         response = send_text_message(sender_id, westStands)
+        text = "What's next?"
+        quick_replies = [
+            {
+                "content_type": "text",
+                "title": "More NBA",
+                "payload": "More NBA"
+            },
+            {
+                "content_type": "text",
+                "title": "Home",
+                "payload": "Home"
+            },
+        ]
+        response = quick_reply_message(sender_id, text, quick_replies)
+
+    def on_enter_divStandings(self, event):
+        print("==========================")
+        print("Sort By Division")
+        print("==========================")
+        sender_id = event['sender']['id']
+        standsList = NBA_standings("division")
+        response = send_text_message(sender_id, standsList[0])
+        response = send_text_message(sender_id, standsList[1])
+        response = send_text_message(sender_id, standsList[2])
+        response = send_text_message(sender_id, standsList[3])
+        response = send_text_message(sender_id, standsList[4])
         text = "What's next?"
         quick_replies = [
             {

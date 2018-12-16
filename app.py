@@ -12,6 +12,8 @@ machine = TocMachine(
         'nbaToday',
         'nbaStatus',
         'nbaStandings',
+        'confStandings',
+        'divStandings',
         'playerInfo',
         'pickDivision',
         'teams',
@@ -49,6 +51,18 @@ machine = TocMachine(
             'source': 'nbaStatus',
             'dest': 'nbaStandings',
             'conditions': 'is_going_to_nbaStandings'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'nbaStandings',
+            'dest': 'confStandings',
+            'conditions': 'is_going_to_confStandings'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'nbaStandings',
+            'dest': 'divStandings',
+            'conditions': 'is_going_to_divStandings'
         },
         {
             'trigger': 'advance',
