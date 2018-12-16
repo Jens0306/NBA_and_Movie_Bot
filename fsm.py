@@ -7,7 +7,6 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
-import asyncio
 
 mytext = "Oh yeah lakers!"
 print("================================")
@@ -278,7 +277,7 @@ class TocMachine(GraphMachine):
         response = quick_reply_message(sender_id, text, quick_replies)
         self.go_back()
 
-    async def on_enter_moviePics(self, event):
+    def on_enter_moviePics(self, event):
         print("==========================")
         print("Movie Pictures")
         print("==========================")

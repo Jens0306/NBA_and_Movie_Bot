@@ -242,7 +242,7 @@ def NBA_news():
     content = ""
     content += "NBA NEWS:\n-------------------------------------------------\n"
     for idx, data in enumerate(soup.select('.contentItem__content--story a'), 0):
-        if idx == 5:
+        if idx == 3:
             return content
         link = head + data['href']
         title = data.find('h1')
