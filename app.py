@@ -38,6 +38,12 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
+            'source': 'user',
+            'dest': 'moviePics',
+            'conditions': 'is_going_to_moviePics'
+        },
+        {
+            'trigger': 'advance',
             'source': 'nbaToday',
             'dest': 'nbaStatus',
             'conditions': 'is_going_to_nbaStatus'

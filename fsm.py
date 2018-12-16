@@ -50,18 +50,7 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
-    # def is_going_to_moviePics(self, event):
-    #     if event.get("postback"):
-    #         text = event['postback']['title']
-    #         return text.lower() == 'movie poster'
-    #     elif event.get("message"):
-    #         text = event['message']['text']
-    #         text = word_tokenize(text.lower())
-    #         if "movie poster" in text:
-    #             return True
-    #     return False
-
-    # # input s to start (NBA today)
+    # input s to start (NBA today)
     def is_going_to_nbaToday(self, event):
         if event.get("postback"):
             text = event['postback']['title']
@@ -71,6 +60,17 @@ class TocMachine(GraphMachine):
             text = event['message']['text']
             text = word_tokenize(text.lower())
             if "s" in text:
+                return True
+        return False
+
+    def is_going_to_moviePics(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            return text.lower() == 'movie poster'
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if "movie poster" in text:
                 return True
         return False
 
@@ -276,17 +276,6 @@ class TocMachine(GraphMachine):
         response = quick_reply_message(sender_id, text, quick_replies)
         self.go_back()
 
-    def on_enter_moviePics(self, event):
-        print("==========================")
-        print("Movie Pictures")
-        print("==========================")
-        sender_id = event['sender']['id']
-        imgUrls = moviePoster(1)
-        for url in imgUrls:
-            responese = send_image_message(sender_id, url)
-        self.go_back()
-
-
     def on_enter_nbaToday(self, event):
         print("==========================")
         print("More NBA Options")
@@ -313,6 +302,16 @@ class TocMachine(GraphMachine):
             }
         ]
         response = template_message(sender_id, title, image_url, subtitle, data)
+
+    def on_enter_moviePics(self, event):
+        print("==========================")
+        print("Movie Pictures")
+        print("==========================")
+        sender_id = event['sender']['id']
+        imgUrls = moviePoster(1)
+        # for url in imgUrls:
+        responese = send_image_message(sender_id, imgUrls[0])
+        self.go_back()
 
     def on_enter_nbaStatus(self, event):
         print("==========================")
