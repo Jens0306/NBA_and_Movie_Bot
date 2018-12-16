@@ -18,6 +18,7 @@ currentDate = str(dataInfo[1])
 # currentDate = "20181207"
 all_teams = []
 all_teams = list(NBA_team(currentYear))
+imgUrls = moviePoster(1)
 # print(all_teams)
 
 
@@ -281,7 +282,6 @@ class TocMachine(GraphMachine):
         print("Movie Pictures")
         print("==========================")
         sender_id = event['sender']['id']
-        imgUrls = moviePoster(1)
         for img in imgUrls:
             responese = send_image_message(sender_id, img)
         self.go_back()
