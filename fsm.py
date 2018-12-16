@@ -37,25 +37,38 @@ class TocMachine(GraphMachine):
             return text.lower() == 'search words'
         return False
 
-    # input s to start
-    def is_going_to_start(self, event):
-        if event.get("postback"):
-            text = event['postback']['title']
-            return text.lower() == 's'
-        elif event.get("message"):
-            text = event['message']['text']
-            return text.lower() == 's'
-        return False
+    # # input s to start
+    # def is_going_to_start(self, event):
+    #     if event.get("postback"):
+    #         text = event['postback']['title']
+    #         return text.lower() == 's'
+    #     elif event.get("message"):
+    #         text = event['message']['text']
+    #         return text.lower() == 's'
+    #     return False
 
-    # NBA today
-    def is_going_to_nbaToday(self, event):
+    # input help to see how to play with it
+    def is_going_to_help(self, event):
         if event.get("postback"):
             text = event['postback']['title']
-            return text.lower() == 'nba today'
+            return text.lower() == 'help'
         elif event.get("message"):
             text = event['message']['text']
             text = word_tokenize(text.lower())
-            if "today" in text:
+            if "help" in text:
+                return True
+        return False
+
+    # # input s to start (NBA today)
+    def is_going_to_nbaToday(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            # return text.lower() == 'nba today'
+            return text.lower() == "s"
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if "s" in text:
                 return True
         return False
 
@@ -219,26 +232,46 @@ class TocMachine(GraphMachine):
         data = "Enter the word."
         response = send_text_message(sender_id, data)
 
-    def on_enter_start(self, event):
+    # def on_enter_start(self, event):
+    #     print("==========================")
+    #     print("Start Playing")
+    #     print("==========================")
+    #     sender_id = event['sender']['id']
+    #     text = "What can I do for you?"
+    #     quick_replies = [
+    #         {
+    #             "content_type": "text",
+    #             "title": "NBA TODAY",
+    #             "payload": "NBA TODAY"
+    #         },
+    #         {
+    #             "content_type": "text",
+    #             "title": "Search Words",
+    #             "payload": "Search Words"
+    #         }
+    #     ]
+    #     response = quick_reply_message(sender_id, text, quick_replies)
+
+    def on_enter_help(self, event):
         print("==========================")
         print("Start Playing")
         print("==========================")
         sender_id = event['sender']['id']
-        text = "What can I do for you?"
+        text = "Enter 'S' to start playing.\nEnter 'Help' to see the usage.\n"
         quick_replies = [
             {
                 "content_type": "text",
-                "title": "NBA TODAY",
-                "payload": "NBA TODAY"
+                "title": "S",
+                "payload": "S"
             },
             {
                 "content_type": "text",
-                "title": "Search Words",
-                "payload": "Search Words"
+                "title": "Help",
+                "payload": "Help"
             }
         ]
         response = quick_reply_message(sender_id, text, quick_replies)
-        # self.go_back()
+        self.go_back()
 
     def on_enter_nbaToday(self, event):
         print("==========================")
@@ -342,12 +375,8 @@ class TocMachine(GraphMachine):
         print("==========================")
         sender_id = event['sender']['id']
         standsList = NBA_standings("division")
-        response = send_text_message(sender_id, standsList[0])
-        response = send_text_message(sender_id, standsList[1])
-        response = send_text_message(sender_id, standsList[2])
-        response = send_text_message(sender_id, standsList[3])
-        response = send_text_message(sender_id, standsList[4])
-        response = send_text_message(sender_id, standsList[5])
+        for stands in standsList:
+            response = send_text_message(sender_id, stands)
         text = "What's next?"
         quick_replies = [
             {

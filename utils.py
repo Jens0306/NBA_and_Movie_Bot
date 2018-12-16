@@ -4,6 +4,7 @@ import os
 GRAPH_URL = "https://graph.facebook.com/v2.6"
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+
 # texr message
 def send_text_message(id, content):
 	post_message_url = "{0}/me/messages?access_token={1}".format(GRAPH_URL, ACCESS_TOKEN)

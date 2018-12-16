@@ -8,7 +8,7 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 machine = TocMachine(
     states=[
         'user',
-        'start',
+        'help',
         'nbaToday',
         'nbaStatus',
         'nbaStandings',
@@ -21,9 +21,6 @@ machine = TocMachine(
         'nbaGames',
         'boxScore',
         'nbaNews',
-        'state10',
-        'standing',
-        'players_info',
         'translate',
         'trans_result'
     ],
@@ -31,12 +28,12 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': 'user',
-            'dest': 'start',
-            'conditions': 'is_going_to_start'
+            'dest': 'help',
+            'conditions': 'is_going_to_help'
         },
         {
             'trigger': 'advance',
-            'source': 'start',
+            'source': 'user',
             'dest': 'nbaToday',
             'conditions': 'is_going_to_nbaToday'
         },
@@ -108,18 +105,6 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
-            'source': 'start',
-            'dest': 'translate',
-            'conditions': 'search_word'
-        },
-        {
-            'trigger': 'advance',
-            'source': 'start',
-            'dest': 'translate',
-            'conditions': 'search_word'
-        },
-        {
-            'trigger': 'advance',
             'source': [
                 'nbaToday',
                 'nbaStatus',
@@ -133,7 +118,7 @@ machine = TocMachine(
                 'boxScore',
                 'nbaNews'
             ],
-            'dest': 'start',
+            'dest': 'user',
             'conditions': 'go_back_to_start'
         },
         {
@@ -155,7 +140,7 @@ machine = TocMachine(
         {
             'trigger': 'go_back',
             'source': [
-                'start',
+                'help',
                 'nbaToday',
                 'nbaStatus'
             ],
@@ -213,4 +198,4 @@ def show_fsm():
 if __name__ == "__main__":
     # show_fsm()
     run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
-    # run(host="127.0.0.1", port="localhost", debug=True, reloader=True)
+    # run(host="localhost", port=5000, debug=True, reloader=True)

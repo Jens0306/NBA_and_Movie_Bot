@@ -188,12 +188,10 @@ def NBA_standings(query):
     teamEast = reqsjson['payload']['standingGroups'][0]['teams']
     teamWest = reqsjson['payload']['standingGroups'][1]['teams']
 
-    dictEast = {}
-    dictWest = {}
-    allTeam = []
-    dictAll = {}
     # ============ sort in conference ==============
     if query == "conference":
+        dictEast = {}
+        dictWest = {}
         for team in teamEast:
             dictEast[team['profile']['name']] = team['standings']['confRank']
         listEast = sorted(dictEast, key=dictEast.__getitem__)
@@ -212,6 +210,7 @@ def NBA_standings(query):
 
     # ============ sort in divisions ================
     elif query == "division":
+        allTeam = []
         for team in teamEast:
             allTeam.append(team)
         for team in teamWest:
@@ -227,9 +226,9 @@ def NBA_standings(query):
                 dictAll[team['profile']['name']] = team['standings']['divRank']
             listAll = sorted(dictAll, key=dictAll.__getitem__)
             for idx, name in enumerate(listAll):
-                text += str(idx+1) + "." + name + "\n"
+                text += str(idx+1) + ". " + name + "\n"
             divs.append(text)
-        print(divs)
+
         return divs
 
 
@@ -242,8 +241,8 @@ def NBA_news():
     soup = BeautifulSoup(res.text, 'html.parser')
     content = ""
     content += "NBA NEWS:\n-------------------------------------------------\n"
-    for index, data in enumerate(soup.select('.contentItem__content--story a'), 0):
-        if index == 5:
+    for idx, data in enumerate(soup.select('.contentItem__content--story a'), 0):
+        if idx == 5:
             return content
         link = head + data['href']
         title = data.find('h1')
