@@ -147,6 +147,7 @@ machine = TocMachine(
             'source': [
                 'help',
                 'nbaToday',
+                'moviePics',
                 'nbaStatus'
             ],
             'dest': 'user'
