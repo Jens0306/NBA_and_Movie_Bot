@@ -2,6 +2,8 @@ import requests, json
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
+from operator import itemgetter
+from itertools import groupby
 
 def NBA_today():
     url = 'https://data.nba.net/10s/prod/v3/today.json'
@@ -210,9 +212,6 @@ def NBA_standings(query):
 
     # ============ sort in divisions ================
     elif query == "division":
-        print("==========================")
-        print("TEST")
-        print("==========================")
         for team in teamEast:
             allTeam.append(team)
         for team in teamWest:
