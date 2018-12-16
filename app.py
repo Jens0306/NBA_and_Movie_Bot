@@ -33,12 +33,6 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': 'user',
-            'dest': 'moviePics',
-            'conditions': 'is_going_to_moviePics'
-        },
-        {
-            'trigger': 'advance',
-            'source': 'user',
             'dest': 'nbaToday',
             'conditions': 'is_going_to_nbaToday'
         },
@@ -146,7 +140,6 @@ machine = TocMachine(
             'trigger': 'go_back',
             'source': [
                 'help',
-                'moviePics',
                 'nbaToday',
                 'nbaStatus'
             ],

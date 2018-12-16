@@ -286,6 +286,7 @@ class TocMachine(GraphMachine):
             responese = send_image_message(sender_id, url)
         self.go_back()
 
+
     def on_enter_nbaToday(self, event):
         print("==========================")
         print("More NBA Options")
