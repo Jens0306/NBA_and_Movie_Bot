@@ -281,7 +281,7 @@ class TocMachine(GraphMachine):
         print("Movie Pictures")
         print("==========================")
         sender_id = event['sender']['id']
-        imgUrls = moviePoster()
+        imgUrls = moviePoster(1)
         for url in imgUrls:
             responese = send_image_message(sender_id, url)
         self.go_back()
