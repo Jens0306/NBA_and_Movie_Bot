@@ -23,7 +23,10 @@ def NBA_team(year):
     teams = reqsjson['league']['standard']
     for team in teams:
         if (team['isNBAFranchise']):
-            list.append(team['nickname'].lower())
+            if (team['nickname'].lower() == "76ers"):
+                list.append(team['urlName'])
+            else:
+                list.append(team['nickname'].lower())
     # print(list)
     return list
 
@@ -62,7 +65,10 @@ def NBA_division_team(division, year):
     }
     for team in teams:
         if (team['isNBAFranchise']):
-            data[team['divName']].append(team['nickname'])
+            if (team['nickname'] == "76ers"):
+                data[team['divName']].append(team['urlName'])
+            else:
+                data[team['divName']].append(team['nickname'])
     print(data)
     return data[division]
 
@@ -172,7 +178,7 @@ def NBA_teamStats(team):
     return player_status
     # return(df)
 
-def nbaStandings():
+def NBA_standings():
     url = 'http://global.nba.com/statsm2/season/conferencestanding.json'
     rs = requests.session()
     res = rs.get(url, verify=True)
@@ -187,14 +193,14 @@ def nbaStandings():
     for team in teamEast:
         dictEast[team['profile']['name']] = team['standings']['confRank']
     listEast = sorted(dictEast, key=dictEast.__getitem__)
-    text1 = "East\n----------------"
+    text1 = "East\n----------------\n"
     for idx, team in enumerate(listEast):
         text1 += str(idx+1) + ". " + team + "\n"
 
     for team in teamWest:
         dictWest[team['profile']['name']] = team['standings']['confRank']
     listWest = sorted(dictWest, key=dictWest.__getitem__)
-    text2 = "West\n----------------"
+    text2 = "West\n----------------\n"
     for idx, team in enumerate(listWest):
         text2 += str(idx+1) + ". " + team + "\n"
 
