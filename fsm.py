@@ -7,6 +7,8 @@ import nltk
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 
+import asyncio
+
 mytext = "Oh yeah lakers!"
 print("================================")
 # print(word_tokenize(mytext))
@@ -283,7 +285,7 @@ class TocMachine(GraphMachine):
         sender_id = event['sender']['id']
         imgUrls = moviePoster(1)
         for img in imgUrls:
-            responese = send_image_message(sender_id, img)
+            responese = await send_image_message(sender_id, img)
         self.go_back()
 
     def on_enter_nbaToday(self, event):

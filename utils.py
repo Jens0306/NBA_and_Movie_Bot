@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import asyncio
 GRAPH_URL = "https://graph.facebook.com/v2.6"
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
@@ -12,7 +13,7 @@ def send_text_message(id, content):
 	requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg)
 
 # image message
-def send_image_message(id, image):
+async def send_image_message(id, image):
 	post_message_url = "{0}/me/messages?access_token={1}".format(GRAPH_URL, ACCESS_TOKEN)
 	response_img = json.dumps({"recipient": {"id": id}, "message": {
 		"attachment": {
