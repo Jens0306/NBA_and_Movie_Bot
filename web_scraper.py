@@ -123,22 +123,15 @@ def NBA_teamStats(team):
     # getting all player names
     player_name = []
     player_data = soup.find_all("td")
-    for i in range(0, len(player_data)//2, 14): # every 14th "td" tag in player_data contains player name
+    for i in range(0, len(player_data)//2, 14): # every 14th "td" tag in player_data contains a player's name
         player = str(player_data[i])
         idx_s = player.find('ank">') + 5
         idx_e = player.find('</a')
         player_name.append(player[idx_s:idx_e])
 
-    # initializing data frame, filling with NaN's
-    # df index = player name, columns = stat names
     df = pd.DataFrame(index=player_name, columns=stats)
     df.fillna(1)
 
-    # parsing html document and assigning statistics to data frame
-    # by row (player index). Finding player statistics via columns (statistic) was
-    # not possible without information loss, due to the lack of html class attributed with 'td'
-    # tags containing information for statistics with null values. For example, David Lee's lack of 3pt %
-    # causes each data point for 3pt % to be shifted, because Lee's lack of data isn't recorded.
     player_index = 0
     for name in player_name:
         player_index += 1
@@ -165,7 +158,7 @@ def NBA_teamStats(team):
     # converting data type to numeric
     df = df.apply(pd.to_numeric, errors='coerce')
 
-    # converting percentages to decimals in columns 3, 4, and 5
+    # converting percentages to decimal in cols 3, 4, and 5
     df.iloc[:, 3] = round((df.iloc[:,3] / 100), 3)
     df.iloc[:, 4] = round((df.iloc[:,4] / 100), 3)
     df.iloc[:, 5] = round((df.iloc[:,5] / 100), 3)
@@ -175,7 +168,6 @@ def NBA_teamStats(team):
 
     # displaying data frame and ensuring all columns are visible
     pd.set_option('display.width', 1000)
-
 
     return player_status
     # return(df)
