@@ -16,24 +16,24 @@ pip install -r requirements.txt
 #### Secret Data
 We must set proper `VERIFY_TOKEN` and `ACCESS_TOKEN`
 
-### Running locally
+### Running on Heroku
+It is already deplyed on Heroku. You don't have to run it locally
+
+<!-- ### Running locally
 #### Run the server
 ```
 python3 app.py
 ```
-
 #### Run ngrok
 I use `ngrok` as http server,
 ```
 ngrok http 5000
 ```
-and then copy the https url and paste it to your webhook verification page.
-
-### Running on Heroku
-......
+and then copy the https url and paste it to your webhook verification page. -->
 
 ## Usage
-Input can be either upper case or lower case.
+Input can be either upper case or lower case. And sometimes you don't have to input exactly the "Same String" as those shown on quick-reply button or template button. I split the input sentence into words using `word_tokenize()` in nltk package. The reason I use `word_tokenize()` instead of `re.split()` is because `re.split()` doesn't achieve tokens in the linguistics sense.
+
 The initial state is set to `user`.
 * `user`
 	* Input: "Help"
@@ -45,56 +45,77 @@ The initial state is set to `user`.
     * Input: "Movie"
         * Reply: show one of the top 15 posters that most people like on iMDB site.
 
+And the following shows what these 3 states are capable to do:
 * `help`
-    As entering this state, it'll trigger `go_back()` and then advance to `user` after replying.
+    show what instructions is available from `user`
+    ==============pictures here==============
+    After that, it'll trigger `go_back()` and then advance to `user` after replying.
 
 * `nbaToday`
     3 buttons on template as a quick guide to the next state.
+    ==============pictures here==============
     * Input: "NBA Games"
-        * Reply: Go to `nbaGames` and shows all games today and the instant scores. And then you can choose to keep exploring more NBA information or go back to user.
+        * Reply: Go to `nbaGames` and shows all games today and the instant scores. And then you can choose to look deeper into boxscore, keep exploring more NBA information or go back to user.
+        * Input: "Box Score"
+            * Reply: go to `boxScore` and shows links to box score of every game.
+            ==============pictures here==============
         * Input: "More NBA"
             * Reply: go to `nbaToday`
         * Input: "Home"
             * Reply: go to `user`
-    
+        ==============pictures here==============
     * Input: "NBA Stats"
         * Reply: Go to `nbaStats`and listen to the next step. You can then choose to see current standings of each team, or player's points-per-game on each team.
+        ==============pictures here==============
         * Input: "Standings"
             * Reply: Go to `nbaStandings`, and then you can choose to view standings of each team sort in conference or division.
+            ==============pictures here==============
             * Input: "Conference"
-                * Reply: show standings of West and East conference
+                * Reply: go to `confStandings` show standings of West and East conference
+                ==============pictures here==============
             * Input: "Division"
-                * Reply: show standings of each division
+                * Reply: go to `divStandings` show standings of each division
+                ==============pictures here==============
+                * ****Notice that these 2 states (`confStandings`&`divStandings`) are not communicatable.
                 And then you can choose to keep exploring more NBA information or go back to user.
                 * Input: "More NBA"
                     * Reply: go to `nbaToday`
                 * Input: "Home"
                     * Reply: go to `user`
-        * Input: "playerInfo"
-            * Reply: go to `pickDivision`, why choosing division is to converge the range, otherwise there's too much.
-            * Input: "{division name}"
-                * Reply: go to `teams`, to choose a team on the division
-                * Input: "{team name}"
-                    * Reply: go to `playerPpg`, shows points/game of every player on that team.
-                    And then you can choose to keep exploring more NBA information or go back to user.
-                    * Input: "More NBA"
-                        * Reply: go to `nbaToday`
-                    * Input: "Home"
-                        * Reply: go to `user`
+            
+        * Input: "players Info"
+            * Reply: go to `playerInfo`. Here you can choose a conference (East or West). Breaking them down to division or conference is to converge it, otherwise there's too many of them.
+            ==============pictures here==============
+            * Input: "{conference name}"
+                * Reply: go to `pickDivision`, now pick a division.
+                ==============pictures here==============
+                * Input: "{division name}"
+                    * Reply: go to `teams`, to choose a team on the division
+                    ==============pictures here==============
+                    * Input: "{team name}"
+                        * Reply: go to `playerPpg`, shows points/game of every player on that team.
+                        ==============pictures here==============
+                        And then you can choose to keep exploring more NBA information or go back to user.
+                        * Input: "More NBA"
+                            * Reply: go to `nbaToday`
+                        * Input: "Home"
+                            * Reply: go to `user`
 
     * Input: "NBA news"
         * Reply: go to `nbaNews`, show you the instant news everyday written by woj!
+        ==============pictures here==============
         And then you can choose to keep exploring more NBA information or go back to user.
         * Input: "More NBA"
             * Reply: go to `nbaToday`
         * Input: "Home"
             * Reply: go to `user`
 
-
 * `moviePics`
-    * Input: ""
-        * Reply: 
-
+    * Input: "Movie"
+        * Reply: go to `moviePics` and randomly shows one of the top15 poster liked by most people from iMdb.
+        ==============pictures here==============
+        After that, it'll trigger `go_back()` and then advance to `user` after replying.
+        
 ## Deployment
 Add additional notes about how to deploy this on a live system
 
@@ -105,9 +126,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Jared Wang** - *Initial work* - [PurpleBooth](https://github.com/jens0306)
+* **Jared Wang** - *Initial work* - (https://github.com/jens0306)
 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
