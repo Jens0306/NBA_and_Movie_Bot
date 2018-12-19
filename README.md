@@ -53,7 +53,7 @@ The initial state is set to `user`.
 
 * `nbaToday`
     * 3 buttons on template as a quick guide to the next state.
-    ![](./img/nbaToday.png)
+    * ![](./img/nbaToday.png)
     * Input: "NBA Games"
         * Reply: Go to `nbaGames` and shows all games today and the instant scores.
         * ![](./img/nbaGames.png)
