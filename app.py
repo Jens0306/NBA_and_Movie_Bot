@@ -86,16 +86,16 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
-            'source': [
-                'pickDivision',
-                'teams'
-            ],
+            'source': 'pickDivision',
             'dest': 'teams',
             'conditions': 'is_going_to_teams'
         },
         {
             'trigger': 'advance',
-            'source': 'teams',
+            'source': [
+                'teams',
+                'playerPpg'
+            ],
             'dest': 'playerPpg',
             'conditions': 'is_going_to_playerPpg'
         },
