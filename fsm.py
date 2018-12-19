@@ -59,11 +59,11 @@ class TocMachine(GraphMachine):
         if event.get("postback"):
             text = event['postback']['title']
             # return text.lower() == 'nba today'
-            return text.lower() == "nba"
+            return text.lower() == "start"
         elif event.get("message"):
             text = event['message']['text']
             text = word_tokenize(text.lower())
-            if "nba" in text:
+            if "start" in text:
                 return True
         return False
 
@@ -259,12 +259,12 @@ class TocMachine(GraphMachine):
         print("Start Playing")
         print("==========================")
         sender_id = event['sender']['id']
-        text = "Enter 'NBA' to see NBA stuff.\nEnter 'Help' to see the usage.\nEnter 'Movie' to see top5 movies' poster"
+        text = "Enter 'Start' to see NBA stuff.\nEnter 'Help' to see the usage.\nEnter 'Movie' to see top 15 movies' poster"
         quick_replies = [
             {
                 "content_type": "text",
-                "title": "NBA",
-                "payload": "NBA"
+                "title": "Start",
+                "payload": "Start"
             },
             {
                 "content_type": "text",

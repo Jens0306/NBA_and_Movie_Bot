@@ -39,7 +39,7 @@ The initial state is set to `user`.
 	* Input: "Help"
 		* Reply: show what instructions is available from `user`
 
-	* Input: "NBA"
+	* Input: "Start"
 		* Reply: go to `nbaToday`, where you can find some instant imformations
 
     * Input: "Movie"
