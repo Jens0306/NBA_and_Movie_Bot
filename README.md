@@ -45,19 +45,19 @@ The initial state is set to `user`.
     * Input: "Movie"
         * Reply: show one of the top 15 posters that most people like on iMDB site.
 
-And the following shows what these 3 states are capable to do:
+* And the following shows what these 3 states are capable to do:
 * `help`
     show what instructions is available from `user`
     * ![](./img/help.png)
-    After that, it'll trigger `go_back()` and then advance to `user` after replying.
+    * After that, it'll trigger `go_back()` and then advance to `user` after replying.
 
 * `nbaToday`
-    3 buttons on template as a quick guide to the next state.
+    * 3 buttons on template as a quick guide to the next state.
     ![](./img/nbaToday.png)
     * Input: "NBA Games"
         * Reply: Go to `nbaGames` and shows all games today and the instant scores.
         * ![](./img/nbaGames.png)
-        And then you can choose to look deeper into boxscore, keep exploring more NBA information or go back to user.
+        * And then you can choose to look deeper into boxscore, keep exploring more NBA information or go back to user.
         * Input: "Box Score"
             * Reply: go to `boxScore` and shows links to box score of every game.
             * ![](./img/boxScore.png)
@@ -97,7 +97,7 @@ And the following shows what these 3 states are capable to do:
                     * Input: "{team name}"
                         * Reply: go to `playerPpg`, shows points/game of every player on that team.
                         * ![](./img/playerPpg.png)
-                        And then you can choose to keep exploring more NBA information or go back to user.
+                        * And then you can choose to keep exploring more NBA information or go back to user.
                         * Input: "More NBA"
                             * Reply: go to `nbaToday`
                         * Input: "Home"
@@ -106,7 +106,7 @@ And the following shows what these 3 states are capable to do:
     * Input: "NBA news"
         * Reply: go to `nbaNews`, show you the instant news everyday written by woj!
         * ![](./img/nbaNews.png)
-        And then you can choose to keep exploring more NBA information or go back to user.
+        * And then you can choose to keep exploring more NBA information or go back to user.
         * Input: "More NBA"
             * Reply: go to `nbaToday`
         * Input: "Home"
@@ -116,7 +116,7 @@ And the following shows what these 3 states are capable to do:
     * Input: "Movie"
         * Reply: go to `moviePics` and randomly shows one of the top15 poster liked by most people from iMdb.
         * ![](./img/moviePics.png)
-        After that, it'll trigger `go_back()` and then advance to `user` after replying.
+        * After that, it'll trigger `go_back()` and then advance to `user` after replying.
 
 
 ## Finite State Machine

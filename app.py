@@ -56,13 +56,19 @@ machine = TocMachine(
         },
         {
             'trigger': 'advance',
-            'source': 'nbaStandings',
+            'source': [
+                'nbaStandings',
+                'divStandings'
+            ],
             'dest': 'confStandings',
             'conditions': 'is_going_to_confStandings'
         },
         {
             'trigger': 'advance',
-            'source': 'nbaStandings',
+            'source': [
+                'nbaStandings',
+                'confStandings'
+            ],
             'dest': 'divStandings',
             'conditions': 'is_going_to_divStandings'
         },
