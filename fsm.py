@@ -259,7 +259,7 @@ class TocMachine(GraphMachine):
         print("Start Playing")
         print("==========================")
         sender_id = event['sender']['id']
-        text = "Enter 'S' to start playing.\nEnter 'Help' to see the usage.\nEnter 'Movie' to see top5 movies' poster"
+        text = "Enter 'NBA' to see NBA stuff.\nEnter 'Help' to see the usage.\nEnter 'Movie' to see top5 movies' poster"
         quick_replies = [
             {
                 "content_type": "text",
