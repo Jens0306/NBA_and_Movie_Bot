@@ -93,6 +93,8 @@ machine = TocMachine(
         {
             'trigger': 'advance',
             'source': [
+                'playerInfo',
+                'pickDivision',
                 'teams',
                 'playerPpg'
             ],

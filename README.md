@@ -78,7 +78,7 @@ The initial state is set to `user`.
             * Input: "Division"
                 * Reply: go to `divStandings` show standings of each division
                 * ![](./img/divStandings.png)
-                * ****Notice that these 2 states (`confStandings`&`divStandings`) are not communicatable.
+                * ****Notice that these 2 states (`confStandings`&`divStandings`) are communicatable.
                 And then you can choose to keep exploring more NBA information or go back to user.
                 * Input: "More NBA"
                     * Reply: go to `nbaToday`
