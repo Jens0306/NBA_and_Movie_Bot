@@ -48,34 +48,36 @@ The initial state is set to `user`.
 And the following shows what these 3 states are capable to do:
 * `help`
     show what instructions is available from `user`
-    ==============pictures here==============
+    ![](./img/help.png)
     After that, it'll trigger `go_back()` and then advance to `user` after replying.
 
 * `nbaToday`
     3 buttons on template as a quick guide to the next state.
-    ==============pictures here==============
+    ![](./img/nbaToday.png)
     * Input: "NBA Games"
-        * Reply: Go to `nbaGames` and shows all games today and the instant scores. And then you can choose to look deeper into boxscore, keep exploring more NBA information or go back to user.
+        * Reply: Go to `nbaGames` and shows all games today and the instant scores.
+        ![](./img/nbaGames.png)
+        And then you can choose to look deeper into boxscore, keep exploring more NBA information or go back to user.
         * Input: "Box Score"
             * Reply: go to `boxScore` and shows links to box score of every game.
-            ==============pictures here==============
+            ![](./img/boxScore.png)
         * Input: "More NBA"
             * Reply: go to `nbaToday`
         * Input: "Home"
             * Reply: go to `user`
-        ==============pictures here==============
+
     * Input: "NBA Stats"
         * Reply: Go to `nbaStats`and listen to the next step. You can then choose to see current standings of each team, or player's points-per-game on each team.
-        ==============pictures here==============
+        ![](./img/nbaStats.png)
         * Input: "Standings"
             * Reply: Go to `nbaStandings`, and then you can choose to view standings of each team sort in conference or division.
-            ==============pictures here==============
+            ![](./img/nbaStandings.png)
             * Input: "Conference"
                 * Reply: go to `confStandings` show standings of West and East conference
-                ==============pictures here==============
+                ![](./img/confStandings.png)
             * Input: "Division"
                 * Reply: go to `divStandings` show standings of each division
-                ==============pictures here==============
+                ![](./img/divStandings.png)
                 * ****Notice that these 2 states (`confStandings`&`divStandings`) are not communicatable.
                 And then you can choose to keep exploring more NBA information or go back to user.
                 * Input: "More NBA"
@@ -85,16 +87,16 @@ And the following shows what these 3 states are capable to do:
             
         * Input: "players Info"
             * Reply: go to `playerInfo`. Here you can choose a conference (East or West). Breaking them down to division or conference is to converge it, otherwise there's too many of them.
-            ==============pictures here==============
+            ![](./img/playerInfo.png)
             * Input: "{conference name}"
                 * Reply: go to `pickDivision`, now pick a division.
-                ==============pictures here==============
+                ![](./img/pickDivision.png)
                 * Input: "{division name}"
                     * Reply: go to `teams`, to choose a team on the division
-                    ==============pictures here==============
+                    ![](./img/teams.png)
                     * Input: "{team name}"
                         * Reply: go to `playerPpg`, shows points/game of every player on that team.
-                        ==============pictures here==============
+                        ![](./img/playerPpg.png)
                         And then you can choose to keep exploring more NBA information or go back to user.
                         * Input: "More NBA"
                             * Reply: go to `nbaToday`
@@ -103,7 +105,7 @@ And the following shows what these 3 states are capable to do:
 
     * Input: "NBA news"
         * Reply: go to `nbaNews`, show you the instant news everyday written by woj!
-        ==============pictures here==============
+        ![](./img/nbaNews.png)
         And then you can choose to keep exploring more NBA information or go back to user.
         * Input: "More NBA"
             * Reply: go to `nbaToday`
@@ -113,9 +115,9 @@ And the following shows what these 3 states are capable to do:
 * `moviePics`
     * Input: "Movie"
         * Reply: go to `moviePics` and randomly shows one of the top15 poster liked by most people from iMdb.
-        ==============pictures here==============
+        ![](./img/moviePics.png)
         After that, it'll trigger `go_back()` and then advance to `user` after replying.
-        
+
 ## Deployment
 Add additional notes about how to deploy this on a live system
 
