@@ -54,6 +54,18 @@ class TocMachine(GraphMachine):
                 return True
         return False
 
+    def is_going_to_hello(self, event):
+        if event.get("postback"):
+            text = event['postback']['title']
+            # return text.lower() == 'nba today'
+            return text.lower() == "hello"
+        elif event.get("message"):
+            text = event['message']['text']
+            text = word_tokenize(text.lower())
+            if "hello" in text:
+                return True
+        return False
+
     # input s to start (NBA today)
     def is_going_to_nbaToday(self, event):
         if event.get("postback"):
@@ -253,6 +265,11 @@ class TocMachine(GraphMachine):
     #         }
     #     ]
     #     response = quick_reply_message(sender_id, text, quick_replies)
+    def on_enter_hello(self, event):
+        sender_id = event['sender']['id']
+        text = "My name is Jared"
+        response = send_text_message(sender_id, text)
+        self.go_back()
 
     def on_enter_help(self, event):
         print("==========================")

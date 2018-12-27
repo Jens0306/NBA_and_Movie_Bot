@@ -9,6 +9,7 @@ machine = TocMachine(
     states=[
         'user',
         'help',
+        'hello',
         'moviePics',
         'nbaToday',
         'nbaStatus',
@@ -29,6 +30,12 @@ machine = TocMachine(
             'source': 'user',
             'dest': 'help',
             'conditions': 'is_going_to_help'
+        },
+        {
+            'trigger': 'advance',
+            'source': 'user',
+            'dest': 'hello',
+            'conditions': 'is_going_to_hello'
         },
         {
             'trigger': 'advance',
@@ -157,6 +164,7 @@ machine = TocMachine(
             'trigger': 'go_back',
             'source': [
                 'help',
+                'hello',
                 'nbaToday',
                 'moviePics',
                 'nbaStatus'
