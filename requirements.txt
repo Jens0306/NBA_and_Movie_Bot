@@ -2,7 +2,7 @@ asn1crypto==0.24.0
 astroid==1.6.5
 backcall==0.1.0
 beautifulsoup4==4.6.3
-bleach==3.0.2
+bleach==3.1.4
 bottle==0.12.13
 certifi==2018.1.18
 cffi==1.11.4
